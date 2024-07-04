@@ -188,7 +188,7 @@ global:
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
     # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
     # Note: For recommendations please check the official sizing guide.
-    resources: {}
+    resources:
        requests:
          cpu: 500m
          memory: 1Gi
@@ -412,7 +412,7 @@ web:
     initialDelaySeconds: 60
     periodSeconds: 30
 
-  resources: {}
+  resources:
     # Note: For recommendations please check the official sizing guide.
      requests:
        cpu: 1000m
