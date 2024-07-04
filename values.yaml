@@ -11,8 +11,8 @@ imageCredentials:
   repositoryUriPrefix: "registry.aquasec.com"
   #REQUIRED only if create is true, for dockerhub - "index.docker.io/v1/"
   registry: "registry.aquasec.com"
-  username: ""
-  password: ""
+  username: {{ .Values.imageCredentials.username | default "" }}
+  password: {{ .Values.imageCredentials.password | default "" }}
 
 clusterRole:
   roleRef: ""
@@ -61,8 +61,8 @@ vaultAnnotations:
 admin:
   createSecret: true
   secretName: aqua-console-secrets
-  token: ""
-  password: ""
+  token: {{ .Values.admin.token | default "" }}
+  password: {{ .Values.admin.password | default "" }}
 
 dockerSock:
   # put true for mount docker socket.
@@ -91,7 +91,7 @@ global:
   # - gs: Giant Swarm platform
   # - k3s: k3s Kubernetes platform
   # - mke: Mirantis Kubernetes Engine
-  platform: ""
+  platform: "k3s"
 
   db:
     external:
@@ -157,12 +157,12 @@ global:
     persistence:
       database:
         enabled: true
-        storageClass:
+        storageClass: ssd-storage
         size: 30Gi
         accessMode: ReadWriteOnce
       audit_database:
         enabled: true
-        storageClass:
+        storageClass: ssd-storage
         size: 30Gi
         accessMode: ReadWriteOnce
     livenessProbe:
@@ -189,12 +189,12 @@ global:
     # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
     # Note: For recommendations please check the official sizing guide.
     resources: {}
-      # requests:
-      #   cpu: 3000m
-      #   memory: 6Gi
-      # limits:
-      #   cpu: 12000m
-      #   memory: 20Gi
+       requests:
+         cpu: 500m
+         memory: 1Gi
+       limits:
+         cpu: 1000m
+         memory: 20Gi
     nodeSelector: {}
     tolerations: []
     affinity: {}
@@ -284,12 +284,12 @@ gateway:
     periodSeconds: 60
   resources: {}
     # Note: For recommendations please check the official sizing guide.
-    # requests:
-    #   cpu: 1500m
-    #   memory: 7Gi
-    # limits:
-    #   cpu: 6000m
-    #   memory: 10Gi
+     requests:
+       cpu: 500m
+       memory: 500Mi
+     limits:
+       cpu: 1000m
+       memory: 1Gi
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -414,12 +414,12 @@ web:
 
   resources: {}
     # Note: For recommendations please check the official sizing guide.
-    # requests:
-    #   cpu: 2000m
-    #   memory: 3Gi
-    # limits:
-    #   cpu: 6000m
-    #   memory: 10Gi
+     requests:
+       cpu: 1000m
+       memory: 1Gi
+     limits:
+       cpu: 1500m
+       memory: 2Gi
   nodeSelector: {}
   tolerations: []
   affinity: {}
