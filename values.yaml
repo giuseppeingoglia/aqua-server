@@ -346,7 +346,7 @@ web:
     #   certFile:                         # If additionalCerts createSecret enable to true, add base64 value of the server public certificate or add filename of certificate if loading from custom secret
 
   service:
-    type: LoadBalancer
+    type: NodePort
     # Specify loadBalancerIP address for aqua-gateway in AKS platform
     loadbalancerIP: ""
     labels: {}
