@@ -11,8 +11,8 @@ imageCredentials:
   repositoryUriPrefix: "registry.aquasec.com"
   #REQUIRED only if create is true, for dockerhub - "index.docker.io/v1/"
   registry: "registry.aquasec.com"
-  username: {{ .Values.imageCredentials.username | default "" }}
-  password: {{ .Values.imageCredentials.password | default "" }}
+  username: ""
+  password: ""
 
 clusterRole:
   roleRef: ""
@@ -61,8 +61,8 @@ vaultAnnotations:
 admin:
   createSecret: true
   secretName: aqua-console-secrets
-  token: {{ .Values.admin.token | default "" }}
-  password: {{ .Values.admin.password | default "" }}
+  token: ""
+  password: ""
 
 dockerSock:
   # put true for mount docker socket.
